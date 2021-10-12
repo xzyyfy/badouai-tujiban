@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="286ae883-ba8f-4f55-a8b7-2e1b3b25e914" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/badouai-tujiban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/badouai-tujiban.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/83-邹逊绩-南京/week1/Demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/83-邹逊绩-南京/week1/Demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/83-邹逊绩-南京/week1/model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/92高向中上海/week1/model.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/83-邹逊绩-南京/week1/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/83-邹逊绩-南京/week1/vocab.json" beforeDir="false" afterPath="$PROJECT_DIR$/92高向中上海/week1/vocab.json" afterDir="false" />
-    </list>
+    <list default="true" id="286ae883-ba8f-4f55-a8b7-2e1b3b25e914" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,6 +88,14 @@
       <option name="presentableId" value="Default" />
       <updated>1634044570035</updated>
     </task>
+    <task id="LOCAL-00001" summary="第二次作业">
+      <created>1634056711937</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634056711937</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -109,5 +108,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="第二次作业" />
+    <option name="LAST_COMMIT_MESSAGE" value="第二次作业" />
   </component>
 </project>
