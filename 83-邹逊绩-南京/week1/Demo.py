@@ -15,12 +15,12 @@ import os
 判断文本中是否有某些特定字符出现
 
 """
-char_dim = 4  # 每个字的维度
+char_dim = 5  # 每个字的维度
 sentence_length = 6  # 样本文本长度
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model_path = "model.pth"
-epoch_num = 100  # 训练轮数
-batch_size = 1000  # 每次训练样本个数
+epoch_num = 50  # 训练轮数
+batch_size = 500  # 每次训练样本个数
 train_sample = 10000  # 每轮训练总共训练的样本总数
 
 class TorchModel(nn.Module):
@@ -28,10 +28,10 @@ class TorchModel(nn.Module):
         super(TorchModel, self).__init__()
         self.embedding = nn.Embedding(len(vocab) + 1, input_dim)
         self.layer = nn.Linear(input_dim, input_dim)
-        self.pool = nn.AvgPool1d(sentence_length)
+        self.pool = nn.MaxPool1d(sentence_length)
         self.classify = nn.Linear(input_dim, 1)
         self.activation = torch.sigmoid  # sigmoid做激活函数
-        self.dropout = nn.Dropout(0.1)
+        self.dropout = nn.Dropout(0.2)
         self.loss = nn.functional.mse_loss  # loss采用均方差损失
 
     # 当输入真实标签，返回loss值；无真实标签，返回预测值
@@ -65,11 +65,11 @@ class TorchModel(nn.Module):
 # abc -> [1,2,3]
 def build_vocab():
     # chars = "abcdefghijklmnopqrstuvwxyz"  # 字符集
-    chars = "一二三四五六姑苏"
+    chars = "字符集随便挑了一些汉字实际上还可以扩充"
     vocab = {}
     for index, char in enumerate(chars):
         vocab[char] = index + 1  # 每个字对应一个序号
-    vocab['空'] = len(vocab) + 1
+    vocab['NULL'] = len(vocab) + 1
     return vocab
 
 
@@ -81,26 +81,28 @@ def build_sample(vocab, sentence_length, i):
     while True:
         x = [random.choice(list(vocab.keys())) for _ in range(sentence_length)]
         # 指定哪些字出现时为正样本
-        # if set("姑苏") & set(x):
-        #     y = 1
-        # else:
-        #     y = 0
-        # break;
-        str = ''.join(x)
-        if i % 2 == 1:
-            if str.find('姑苏') >= 0:
-                y = 1
-                break
-        if i % 2 == 0:
-            if str.find('姑苏') < 0:
-                y = 0
-                # if i % 22 == 0:
-                #     x[0] = '苏'
-                # if i % 38 == 0:
-                #     x[-1] = '姑'
-                break
+        if set("字符") & set(x):
+            y = 1
+        # elif set("可以") & set(x):
+        #     y=2
+        else:
+            y = 0
+        break;
+        # str = ''.join(x)
+        # if i % 2 == 1:
+        #     if str.find("字符") >= 0:
+        #         y = 1
+        #         break
+        # if i % 2 == 0:
+        #     if str.find('字符') < 0:
+        #         y = 0
+        #         # if i % 22 == 0:
+        #         #     x[0] = '苏'
+        #         # if i % 38 == 0:
+        #         #     x[-1] = '姑'
+        #         break
 
-    x = [vocab.get(word, vocab['空']) for word in x]  # 将字转换成序号，为了做embedding
+    x = [vocab.get(word, vocab['NULL']) for word in x]  # 将字转换成序号，为了做embedding
     return x, y
 
 
@@ -130,8 +132,8 @@ def build_model(vocab, char_dim, sentence_length):
 # 用来测试每轮模型的准确率
 def evaluate(model, vocab, sample_length):
     model.eval()
-    x, y = build_dataset(200, vocab, sample_length)  # 建立200个用于测试的样本
-    print("本次预测集中共有%d个正样本，%d个负样本" % (sum(y), 200 - sum(y)))
+    x, y = build_dataset(300, vocab, sample_length)  # 建立200个用于测试的样本
+    print("本次预测集中共有%d个正样本，%d个负样本" % (sum(y), 300 - sum(y)))
     correct, wrong = 0, 0
     with torch.no_grad():
         y_pred = model(x)  # 模型预测
